@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+  <div class="jumbotron">
+    <h2>PLease Login:</h2>
+    <h3>(Must be a superuser check with the site admin)</h3>
+
+    {% if form.errors %}
+      <p>Your username and password didn't match.Please try again!</p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+      <input type="submit" class="btn btn-primary" value="Login">
+      <input type="hidden" name="next" value="{{ next }}">
+
+<!-- The above hidden input is used because of the authorization user with and the{{next}} is specified there       -->
+
+    </form>
+
+  </div>
+
+{% endblock %}
